@@ -1,23 +1,13 @@
-import express, {Request, Response} from 'express'
+import express from 'express'
 import cors from 'cors'
-import { MongoClient } from "mongodb";
-import {uri} from "./credentials"
-
-
-const client = new MongoClient(uri)
-const db = client.db("DamianCluster")
-const photoCollections = db.collection("photos")
+import { photoRouter } from "./src/routers/photo-router"
 
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 
-
-app.get("/", async (req: Request, res: Response) => {
-    const photos = await photoCollections.find({}).toArray()
-res.status(200).json(photos)
-})
+app.use('/photos', photoRouter)
 
 const PORT = 5001
 app.listen(PORT, () => {
