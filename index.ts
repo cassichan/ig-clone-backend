@@ -9,7 +9,4 @@ app.use(cors());
 
 app.use("/photos", photoRouter);
 
-const PORT = 5001;
-app.listen(PORT, () => {
-  console.log(`Started on port: ${PORT}`);
-});
+export default app;
